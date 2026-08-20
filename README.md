@@ -6,6 +6,8 @@
 ![Status](https://img.shields.io/badge/status-documentation%20in%20progress-blue)
 ![Platform](https://img.shields.io/badge/platform-Windows%20Server%202025-0078D4)
 ![Focus](https://img.shields.io/badge/focus-SOC%20Lab%20%7C%20Blue%20Team-2ea44f)
+![PowerShell CI](https://github.com/Arizetbest/Arizetbest-enterprise-soc-lab/actions/workflows/powershell-ci.yml/badge.svg)
+![Release](https://img.shields.io/github/v/release/Arizetbest/Arizetbest-enterprise-soc-lab?display_name=tag&sort=semver)
 
 Hands-on enterprise Security Operations Center (SOC) lab focused on Windows Server 2025, Active Directory, Group Policy, Windows 11 endpoint hardening, security logging, SIEM visibility, threat detection, and incident response practice.
 
@@ -18,6 +20,21 @@ Hands-on enterprise Security Operations Center (SOC) lab focused on Windows Serv
 This repository documents the build-out of a practical SOC lab designed to model core enterprise defensive operations. The lab shows how Windows infrastructure, centralized identity, endpoint configuration, Group Policy, security logging, and incident response workflows fit together in a monitored enterprise environment.
 
 The project is structured as a professional portfolio and learning resource for SOC analyst, blue team, detection engineering, and Windows security administration skills.
+
+## SOC Evidence Toolkit
+
+The repository now includes the first version of a reusable defensive PowerShell module. `Get-SocUserLogonEvidence` collects and normalizes successful logons, failed logons, account lockouts, and account unlocks for an exact user identity from an authorized Windows Security log source.
+
+```powershell
+Import-Module .\src\SocEvidenceToolkit\SocEvidenceToolkit.psd1 -Force
+
+Get-SocUserLogonEvidence `
+    -Identity 'soc.analyst' `
+    -ComputerName 'DC01' `
+    -StartTime (Get-Date).AddDays(-7)
+```
+
+The command returns structured PowerShell objects so analysts can review results interactively or export the minimum necessary evidence. See [installation and first use](docs/INSTALLATION.md).
 
 ## Lab Objectives
 
@@ -39,6 +56,7 @@ The project is structured as a professional portfolio and learning resource for 
 | Password policy | Documented | Default Domain Policy hardening includes password requirements. |
 | Windows Update policy | Documented | Centralized Windows Update behavior configured through Group Policy. |
 | Account lockout policy | Documented | Failed sign-in thresholds and lockout settings configured through Group Policy. |
+| PowerShell SOC toolkit | In development | Initial user logon evidence command, tests, CI, and operator documentation prepared for v0.1.0. |
 | SIEM integration | Planned | Log forwarding, parsing, dashboards, and alerting documentation will be added as the lab matures. |
 | Threat detection | Planned | Detection logic will be mapped to realistic behaviors and documented with test evidence. |
 | Incident response | Planned | Triage workflows, investigation notes, and response playbooks will be added in later phases. |
@@ -111,21 +129,21 @@ Future detections should include the data source, detection goal, query or rule 
 
 ```text
 .
+|-- .github/workflows/powershell-ci.yml
+|-- docs/
+|   |-- EVIDENCE_TRACKER.md
+|   |-- INSTALLATION.md
+|   `-- SOC_Lab_Master_Checklist.md
+|-- src/SocEvidenceToolkit/
+|   |-- SocEvidenceToolkit.psd1
+|   `-- SocEvidenceToolkit.psm1
+|-- tests/SocEvidenceToolkit.Tests.ps1
+|-- CHANGELOG.md
+|-- CODE_OF_CONDUCT.md
+|-- CONTRIBUTING.md
 |-- LICENSE
-`-- README.md
-```
-
-As the lab grows, detailed documentation can be separated into dedicated files such as:
-
-```text
-docs/
-|-- architecture.md
-|-- active-directory.md
-|-- group-policy.md
-|-- windows-hardening.md
-|-- logging-and-siem.md
-|-- detection-rules.md
-`-- incident-response.md
+|-- README.md
+`-- SECURITY.md
 ```
 
 ## Documentation Roadmap
@@ -137,6 +155,19 @@ docs/
 - Add SIEM setup notes, dashboard screenshots, and useful search queries.
 - Build a detection catalog with test evidence and response recommendations.
 - Add incident response runbooks for common SOC alerts.
+- Publish the first semantic release after automated tests pass.
+- Invite issue reports and defensive contributions using the contribution guide.
+- Record only verifiable adoption and contribution metrics in the evidence tracker.
+
+## Quality and Verification
+
+Every change to the PowerShell module is designed to be checked with Pester and PSScriptAnalyzer through GitHub Actions. Contributors are expected to include tests, sanitized examples, and clear documentation for behavior changes.
+
+- [Installation guide](docs/INSTALLATION.md)
+- [Contribution guide](CONTRIBUTING.md)
+- [Security policy](SECURITY.md)
+- [Changelog](CHANGELOG.md)
+- [Public impact and evidence tracker](docs/EVIDENCE_TRACKER.md)
 
 ## Skills Demonstrated
 
