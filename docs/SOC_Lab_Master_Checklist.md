@@ -223,12 +223,13 @@ This is the authoritative progress tracker for the complete enterprise SOC home 
 
 ## Phase 14 — Documentation and Portfolio
 
-- [ ] Maintain the GitHub repository `Arizetbest-enterprise-soc-lab`
-- [ ] Complete the professional `README.md`
-- [ ] Add Shields.io project badges
+- [x] Maintain the GitHub repository `Arizetbest-enterprise-soc-lab`
+- [x] Complete the professional `README.md`
+- [x] Add Shields.io project badges
 - [ ] Add a sanitized architecture diagram
 - [ ] Add the implementation checklist and progress table
-- [ ] Add PowerShell, Linux, and verification scripts
+- [x] Add PowerShell and Windows verification scripts
+- [ ] Add Linux verification scripts after the Ubuntu phase is built
 - [ ] Add sanitized GPO reports and configuration evidence
 - [ ] Add Wazuh, Security Onion, and Sentinel screenshots
 - [ ] Remove passwords, tokens, public IP addresses, personal data, and sensitive IDs
@@ -268,3 +269,4 @@ This is the authoritative progress tracker for the complete enterprise SOC home 
 | 2026-08-18 | Phase 5 | Linked `SOC – Windows Event Log Policy` to the Workstations OU | Screenshot confirms the link is enabled | Link the policy to the Domain Controllers OU |
 | 2026-08-18 | Phase 5 | Verified Security at 512 MB and System/Application at 128 MB | `wevtutil` output confirms all three maximum sizes | Disable Security automatic backup and confirm the Domain Controllers OU link |
 | 2026-08-18 | Phase 5 completed | Verified overwrite behavior and disabled automatic backup for all three logs | Security shows `retention: false`, `autoBackup: false`, and `maxSize: 536870912` | Begin Microsoft Defender Antivirus GPO |
+| 2026-09-09 | Documentation | Added a sanitized PowerShell command reference and reusable verification scripts | Repository paths and public-safe placeholders reviewed | Complete and validate Microsoft Defender Antivirus GPO |

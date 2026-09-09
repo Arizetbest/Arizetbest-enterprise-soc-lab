@@ -3,7 +3,7 @@
 ![GitHub License](https://img.shields.io/github/license/Arizetbest/Arizetbest-enterprise-soc-lab)
 ![Last Commit](https://img.shields.io/github/last-commit/Arizetbest/Arizetbest-enterprise-soc-lab)
 ![Repo Size](https://img.shields.io/github/repo-size/Arizetbest/Arizetbest-enterprise-soc-lab)
-![Status](https://img.shields.io/badge/status-documentation%20in%20progress-blue)
+![Status](https://img.shields.io/badge/status-foundation%20complete%20%7C%20hardening%20in%20progress-blue)
 ![Platform](https://img.shields.io/badge/platform-Windows%20Server%202025-0078D4)
 ![Focus](https://img.shields.io/badge/focus-SOC%20Lab%20%7C%20Blue%20Team-2ea44f)
 
@@ -39,6 +39,11 @@ The project is structured as a professional portfolio and learning resource for 
 | Password policy | Documented | Default Domain Policy hardening includes password requirements. |
 | Windows Update policy | Documented | Centralized Windows Update behavior configured through Group Policy. |
 | Account lockout policy | Documented | Failed sign-in thresholds and lockout settings configured through Group Policy. |
+| Advanced Audit Policy | Verified | Audit categories configured centrally through Group Policy. |
+| PowerShell Script Block Logging | Verified | Operational log verification includes Event ID `4104`. |
+| Event log sizing and retention | Verified | Security: 512 MB; System and Application: 128 MB; overwrite enabled. |
+| Microsoft Defender Antivirus | In progress | Verification script added; controls are not marked complete until final validation. |
+| Microsoft Defender Firewall | In progress | Profile and log-path verification script added; final logging validation remains open. |
 | SIEM integration | Planned | Log forwarding, parsing, dashboards, and alerting documentation will be added as the lab matures. |
 | Threat detection | Planned | Detection logic will be mapped to realistic behaviors and documented with test evidence. |
 | Incident response | Planned | Triage workflows, investigation notes, and response playbooks will be added in later phases. |
@@ -112,21 +117,23 @@ Future detections should include the data source, detection goal, query or rule 
 ```text
 .
 |-- LICENSE
-`-- README.md
+|-- README.md
+|-- docs/
+|   |-- POWERSHELL_COMMANDS.md
+|   `-- SOC_Lab_Master_Checklist.md
+`-- scripts/
+    |-- README.md
+    |-- Verify-SOCLabFoundation.ps1
+    |-- Verify-GroupPolicyAndLogging.ps1
+    |-- Verify-DefenderConfiguration.ps1
+    `-- Verify-FirewallConfiguration.ps1
 ```
 
-As the lab grows, detailed documentation can be separated into dedicated files such as:
+## PowerShell Command Library
 
-```text
-docs/
-|-- architecture.md
-|-- active-directory.md
-|-- group-policy.md
-|-- windows-hardening.md
-|-- logging-and-siem.md
-|-- detection-rules.md
-`-- incident-response.md
-```
+The [sanitized command reference](docs/POWERSHELL_COMMANDS.md) records the principal commands used to validate Active Directory, DNS, domain membership, Group Policy, Advanced Audit Policy, PowerShell logging, and Windows event-log retention.
+
+Reusable scripts are available in [`scripts/`](scripts/). All public examples use placeholder infrastructure values and contain no credentials. Defender Antivirus and Defender Firewall scripts are validation helpers for work in progress; their inclusion does not mark those phases as complete.
 
 ## Documentation Roadmap
 
